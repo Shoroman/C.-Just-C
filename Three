@@ -1,0 +1,70 @@
+#include "stdafx.h"
+#include <iostream>
+#include <cmath>
+#include <algorithm>
+#include <ctime> 
+#include <chrono>
+#include <thread>
+#define LL long long
+using namespace std;
+
+LL const SIZE = 1000;
+
+void next() { cout << endl; }
+
+void stop(int p) {
+	this_thread::sleep_for(chrono::milliseconds(100));
+	srand(time(NULL) * p);
+}
+
+int main()
+{
+	setlocale(LC_ALL, "rus");
+	srand(time(NULL));
+	const int s = 9;
+
+	int a[s], b[s], c[s], d[s];
+
+	for (int i = 0; i < s; i++) a[i] = rand() % ((SIZE * 2) + 1) - SIZE;
+	stop(2);
+
+	for (int i = 0; i < s; i++) b[i] = rand() % ((SIZE * 2) + 1) - SIZE;
+	stop(3);
+
+	for (int i = 0; i < s; i++) c[i] = rand() % ((SIZE * 2) + 1) - SIZE;
+	stop(1);
+
+	cout << "Сгенерировано три последовательности:" << endl;
+	cout << "a:" << " ";
+	for (int i = 0; i < s; i++) {
+		cout << a[i] << " ";
+	}
+	next();
+
+	cout << "b:" << " ";
+	for (int i = 0; i < s; i++) {
+		cout << b[i] << " ";
+	}
+	next();
+
+	cout << "c:" << " ";
+	for (int i = 0; i < s; i++) {
+		cout << c[i] << " ";
+	}
+	next();
+
+	for (int i = 0; i < s; i++) {
+		d[i] = max(max(a[i], b[i]), c[i]);
+	}
+
+	next();
+
+	cout << "Была сформирована новая последовательность:" << endl << "d:" << " ";
+	for (int i = 0; i < s; i++) {
+		cout << a[i] << " ";
+	}
+
+	system("pause");
+    return 0;
+}
+
