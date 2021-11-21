@@ -1,0 +1,60 @@
+#include "stdafx.h"
+#include <iostream>
+#include <cmath>
+#include <algorithm>
+#include <ctime> 
+#include <chrono>
+#include <thread>
+#define LL long long
+using namespace std;
+
+LL const SIZE = 1000;
+
+void next() { cout << endl; }
+
+void stop(int p) {
+	this_thread::sleep_for(chrono::milliseconds(100));
+	srand(time(NULL) * p);
+}
+
+int main()
+{
+	setlocale(LC_ALL, "rus");
+	srand(time(NULL));
+	const int s = 10;
+
+	int x[s], y[s], I;
+
+	for (int i = 0; i < s; i++) x[i] = rand() % ((SIZE * 2) + 1) - SIZE;
+	stop(3);
+	for (int i = 0; i < s; i++) y[i] = rand() % ((SIZE * 2) + 1) - SIZE;
+
+	cout << "Сгенерированы две последовательности:" << endl << "x: ";
+	for (int i = 0; i < s; i++) cout << x[i] << " ";
+	next();
+	cout << "y: ";
+	for (int i = 0; i < s; i++) cout << y[i] << " ";
+
+	for (int i = 0; i < s; i++) {
+		I = min(x[i], y[i]);
+		x[i] = max(x[i], y[i]);
+		y[i] = I;
+	}
+
+	for (int i = 0; i < 2; i++) 
+		next();
+
+	cout << "Преобразованные последовательности:" << endl << "x: ";
+	for (int i = 0; i < s; i++) 
+		cout << x[i] << " ";
+	next();
+
+	cout << "y: ";
+	for (int i = 0; i < s; i++)
+		cout << y[i] << " ";
+	next();
+
+	system("pause");
+    return 0;
+}
+
