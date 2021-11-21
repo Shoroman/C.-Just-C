@@ -1,0 +1,88 @@
+#include "stdafx.h"
+#include <iostream>
+#include <cmath>
+#include <algorithm>
+#include <ctime> 
+#define LL long long
+using namespace std;
+
+LL const SIZE = 1000;
+int N, arr[SIZE];
+
+void next() { cout << endl; }
+
+LL sum(int a[], int act) {
+	int res1 = a[0], res2 = a[0]; 
+	for (int i = 1; i < N; i++) {
+		res1 += a[i];
+		res2 *= a[i];
+	}
+	if (act == 1) return res1;
+	else return res2;
+	next();
+}
+
+LL miNmaX(int a[], int act) {
+	int res1 = a[0], res2 = a[0];
+	for (int i = 1; i < N; i++) {
+		if (res1 < a[i]) res1 = a[i];
+		if (res2 > a[i]) res2 = a[i];
+	}
+	if (act == 1) return res1;
+	else return res2;
+	next();
+}
+
+long double sA(int a[], int act) {
+	double n = N;
+	if (a[0] <= 0) {
+		a[0] = 0;
+		n -= 1;
+	}
+	int res1 = a[0], res2 = a[0];
+	for (int i = 1; i < N; i++) {
+		if (a[i] > 0) {
+			res1 += a[i];
+			res2 *= a[i];
+		}
+		else n -= 1;
+	}
+	if (act == 1) return (res1 / n);
+	else return pow(res2, 1.0 / n);
+}
+
+int main()
+{
+	setlocale(LC_ALL, "rus");
+	srand(time(NULL));
+
+	cin >> N;
+
+	for (int i = 0; i < N; i++) {
+		arr[i] = rand() % ((SIZE * 2) + 1) - SIZE;
+	}
+	next();
+
+	cout << "Сгенерированный массив:" << endl;
+	for(int i = 0; i < N; i++) {
+		cout << arr[i] << " ";
+	}
+
+	for (int i = 0; i < 2; i++) next();
+
+	cout << "Сумма и произведение:" << endl;
+	for (int i = 1; i <= 2; i++) cout << sum(arr, i) << endl;
+	next();
+
+	cout << "Максимальный и минимальный элемент:" << endl;
+	for (int i = 1; i <= 2; i++) cout << miNmaX(arr, i) << endl;
+	next();
+
+	cout << "Среднее арифметическое и среднее геометрическое:" << endl;
+	for (int i = 1; i <= 2; i++) cout << sA(arr, i) << endl;
+	next();
+
+	system("pause");
+    return 0;
+}
+
