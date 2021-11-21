@@ -1,0 +1,67 @@
+#include "stdafx.h"
+#include <iostream>
+#include <cmath>
+#include <algorithm>
+#include <ctime> 
+#include <chrono>
+#include <thread>
+#define LL long long
+using namespace std;
+
+LL const SIZE = 10;
+
+void next() { cout << endl; }
+
+void stop(int p) {
+	this_thread::sleep_for(chrono::milliseconds(100));
+	srand(time(NULL) * p);
+}
+
+int main()
+{
+	setlocale(LC_ALL, "rus");
+	srand(time(NULL));
+	const int s = 25;
+	int a[s];
+
+	for (int i = 0; i < s; i++) a[i] = rand() % ((SIZE * 2) + 1) - SIZE;
+	cout << "Сгенерированный массив: " << endl;
+	for (int i = 0; i < s; i++) cout << a[i] << " ";
+	next();
+
+	int sum = 0, mult = 1, X = 25, g = 0;
+	for (int i = 0; i < s; i++) {
+		if (a[i] == 0) {
+			cout << endl << "Номер нулевого элемента массива — " << i + 1 << endl;
+			X = i + 1;
+			g = 1;
+			break;
+		}
+		sum += a[i];
+		mult *= a[i];
+	}
+	next();
+
+	cout << "Сумма элементов до нуля: " << sum << endl;
+	cout << "Произведение элементов до нуля: " << mult << endl;
+
+	next();
+	int ma = a[X], mi = a[X];
+
+	if (g == 1) {
+		for (int i = X; i < s - 1; i++) {
+			if (ma < a[i + 1]) {
+				ma = a[i + 1];
+			}
+			if (mi > a[i + 1]) {
+				mi = a[i + 1];
+			}
+		}
+		cout << "Наибольший элемент после нуля — " << ma << endl;
+		cout << "Наименьший элемент после нуля — " << mi << endl;
+	}
+
+	system("pause");
+    return 0;
+}
+
